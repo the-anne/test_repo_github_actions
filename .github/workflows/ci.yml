@@ -27,8 +27,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget
       - name: Install dependencies
-        projects: ./test-github-actions/TestProject1/TestProject1.csproj
-        run: dotnet restore
+        run: dotnet restore ./test-github-actions/TestProject1/TestProject1.csproj
       - name: Build
         working-directory: ./test-github-actions/TestProject1
         run: dotnet build --no-restore
