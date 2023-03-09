@@ -27,10 +27,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuget
       - name: Install dependencies
-        working-directory: ./test-github-actions/TestProject1/UnitTest1.cs
         run: dotnet restore
       - name: Build
-        working-directory: ./test-github-actions/TestProject1/UnitTest1.cs
+        working-directory: ./test-github-actions/TestProject1
         run: dotnet build --no-restore
       - name: Test with dotnet
         run: dotnet test --logger trx --verbosity normal
