@@ -32,4 +32,4 @@ jobs:
         working-directory: ./test-github-actions/TestProject1
         run: dotnet build --no-restore
       - name: Test with dotnet
-        run: dotnet test --logger trx --verbosity normal
+        run: dotnet test --logger trx --verbosity normal ./test-github-actions/TestProject1/TestProject1.csproj
