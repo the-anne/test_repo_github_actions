@@ -14,28 +14,23 @@ jobs:
       matrix:
         dotnet-version: ['6.0.x']
 
-      steps:
-        - uses: actions/checkout@v3
-
-        - name: Setup dotnet
-          uses: actions/setup-dotnet@v3
-          with:
-            dotnet-version: ${{ matrix.dotnet-version }}
-
-        - uses: actions/cache@v2
-          with:
-            path: ~/.nuget/packages
-            key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-nuget
-
-        - name: Install dependencies
-          working-directory: ./TestProject1
-          run: dotnet restore
-
-        - name: Build
-          working-directory: ./TestProject1
-          run: dotnet build --no-restore
-
-        - name: Test with dotnet
-          run: dotnet test --logger trx --verbosity normal
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+      - name: Install dependencies
+        working-directory: ./TestProject1
+        run: dotnet restore
+      - name: Build
+        working-directory: ./TestProject1
+        run: dotnet build --no-restore
+      - name: Test with dotnet
+        run: dotnet test --logger trx --verbosity normal
